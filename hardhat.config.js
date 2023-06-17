@@ -24,14 +24,32 @@ module.exports = {
             chainId: 11155111,
             blockConfirmations: 6,
             url: SEPOLIA_RPC_URL,
+            saveDeployments: true,
             accounts: [PRIVATE_KEY],
         },
         mumbai: {
             chainId: 80001,
             blockConfirmations: 6,
             url: MUMBAI_RPC_URL,
+            saveDeployments: true,
             accounts: [PRIVATE_KEY],
         },
+    },
+    etherscan: {
+        apiKey: {
+            sepolia: ETHERSCAN_API_KEY,
+            polygon: POLYGONSCAN_API_KEY,
+        },
+        customChains: [
+            {
+                network: "goerli",
+                chainId: 5,
+                urls: {
+                    apiURL: "https://api-goerli.etherscan.io/api",
+                    browserURL: "https://goerli.etherscan.io",
+                },
+            },
+        ],
     },
     gasReporter: {
         enabled: false,
@@ -40,16 +58,30 @@ module.exports = {
         noColors: true,
         // coinmarketcap: process.env.COINMARKETCAP_API_KEY,
     },
-    solidity: "0.8.18",
+    contractSizer: {
+        runOnCompile: false,
+        only: ["Raffle"],
+    },
+    solidity: {
+        compilers: [
+            {
+                version: "0.8.18",
+            },
+            {
+                version: "0.8.7",
+            },
+        ],
+    },
     namedAccounts: {
         deployer: {
             default: 0,
+            1: 0,
         },
         player: {
             default: 1,
         },
     },
     mocha: {
-        timeout: 300000, // 300 sec 
+        timeout: 500000, // 500 sec
     },
 }
