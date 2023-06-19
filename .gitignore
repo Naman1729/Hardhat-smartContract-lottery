@@ -9,7 +9,6 @@ deployments
 coverage.json
 coverage
 
-
 gas-report.txt
 
 .env

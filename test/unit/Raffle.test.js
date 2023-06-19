@@ -53,6 +53,7 @@ const { assert, expect } = require("chai")
                   )
               })
           })
+
           describe("checkUpkeep", function () {
               it("returns false if people haven't send any ETH", async function () {
                   await network.provider.send("evm_increaseTime", [interval.toNumber() + 1])
@@ -85,6 +86,7 @@ const { assert, expect } = require("chai")
                   assert(upkeepNeeded)
               })
           })
+
           describe("performUpkeep", function () {
               it("it can only run if checkupkeep is true", async function () {
                   await raffle.enterRaffle({ value: raffleEntranceFee })
@@ -110,6 +112,7 @@ const { assert, expect } = require("chai")
                   assert(raffleState.toString() == "1")
               })
           })
+          
           describe("fulfillRandomWords", function () {
               beforeEach(async function () {
                   await raffle.enterRaffle({ value: raffleEntranceFee })
