@@ -112,7 +112,7 @@ const { assert, expect } = require("chai")
                   assert(raffleState.toString() == "1")
               })
           })
-          
+
           describe("fulfillRandomWords", function () {
               beforeEach(async function () {
                   await raffle.enterRaffle({ value: raffleEntranceFee })
@@ -154,9 +154,13 @@ const { assert, expect } = require("chai")
                               const endingTimeStamp = await raffle.getLatestTimeStamp()
                               const numPlayers = await raffle.getNumberOfPlayers()
                               const winnerEndingBalance = await accounts[1].getBalance()
+                              const numberOfRandomWords = await raffle.getNumWords()
+                              const numberOfBlockToWait = await raffle.getRequestConfirmations()
 
                               assert.equal(numPlayers.toString(), "0")
                               assert.equal(raffleState.toString(), "0")
+                              assert.equal(numberOfRandomWords.toString(), "1")
+                              assert.equal(numberOfBlockToWait.toString(), "3")
                               assert(endingTimeStamp > startingTimeStamp)
                               assert.equal(
                                   winnerEndingBalance.toString(),
